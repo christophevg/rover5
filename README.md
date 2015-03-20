@@ -1,6 +1,6 @@
 # Rover 5
 
-A repository with (hopefully) useful things about the Rover 5 robotic platform.
+A repository with (hopefully) useful things about the Rover 5 robotic platform.  
 Christophe VG (<contact@christophe.vg>)  
 [https://github.com/christophevg/rover5](https://github.com/christophevg/rover5)
 
