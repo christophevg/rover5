@@ -1,44 +1,44 @@
 // the Rover 5 Robot Platform
 
-rover5_body_width  =  89;
-rover5_body_length = 168;
-rover5_body_height =  49;
+r5_body_width  =  89;
+r5_body_length = 168;
+r5_body_height =  49;
 
 module rover5() {
   // body
   difference() {
     union() {
-        translate([-rover5_body_width/2,-rover5_body_length/2]) {
-            cube([rover5_body_width,rover5_body_length,rover5_body_height]);
+        translate([-r5_body_width/2,-r5_body_length/2]) {
+            cube([r5_body_width,r5_body_length,r5_body_height]);
         }
-        translate([rover5_body_width/2, 45,13]) {
+        translate([r5_body_width/2, 45,13]) {
             rotate([0,90,0]) { cylinder(h=8, r1=30, r2=22); }
         }
 
-        translate([rover5_body_width/2, -45,13]) {
+        translate([r5_body_width/2, -45,13]) {
             rotate([0,90,0]) {
                 cylinder(h=8, r1=30, r2=22); 
                 translate([0,0,8]) { cylinder(h=5, r=15); }
             }
         }
 
-        translate([-rover5_body_width/2, 45,13]) {
+        translate([-r5_body_width/2, 45,13]) {
             rotate([0,-90,0]) {
                 cylinder(h=8, r1=30, r2=22);
                 translate([0,0,8]) { cylinder(h=5, r=15); }
             }
         }
 
-        translate([-rover5_body_width/2, -45,13]) {
+        translate([-r5_body_width/2, -45,13]) {
             rotate([0,-90,0]) {
                 cylinder(h=8, r1=30, r2=22);
                 translate([0,0,8]) { cylinder(h=5, r=15); }
             }
         }
     }
-    translate([-106/2,-rover5_body_length/2,-rover5_body_height])    { cube([106,rover5_body_length,rover5_body_height]); }
-    translate([-109/2,-rover5_body_length/2,-22]) { rotate([45,0,0]) { cube([109,30,30]); } }
-    translate([-109/2, rover5_body_length/2,-22]) { rotate([45,0,0]) { cube([109,30,30]); } }
+    translate([-106/2,-r5_body_length/2,-r5_body_height])    { cube([106,r5_body_length,r5_body_height]); }
+    translate([-109/2,-r5_body_length/2,-22]) { rotate([45,0,0]) { cube([109,30,30]); } }
+    translate([-109/2, r5_body_length/2,-22]) { rotate([45,0,0]) { cube([109,30,30]); } }
   }
 
   module arm(i=0, o="right", wh=36, wr=30) {
@@ -75,10 +75,10 @@ module rover5() {
   }
 
   // arms
-  translate([ rover5_body_width/2,  45, 13]) { rotate([  0,90,0]) { arm(-10 ); } }
-  translate([-rover5_body_width/2, -45, 13]) { rotate([180,90,0]) { arm(-10); } }
-  translate([ rover5_body_width/2, -45, 13]) { rotate([  0,90,0]) { arm( 10, o="left"); } }
-  translate([-rover5_body_width/2,  45, 13]) { rotate([180,90,0]) { arm( 10, o="left"); } }
+  translate([ r5_body_width/2,  45, 13]) { rotate([  0,90,0]) { arm(-10 ); } }
+  translate([-r5_body_width/2, -45, 13]) { rotate([180,90,0]) { arm(-10); } }
+  translate([ r5_body_width/2, -45, 13]) { rotate([  0,90,0]) { arm( 10, o="left"); } }
+  translate([-r5_body_width/2,  45, 13]) { rotate([180,90,0]) { arm( 10, o="left"); } }
 }
 
 // rover5();
