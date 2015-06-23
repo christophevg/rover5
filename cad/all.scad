@@ -1,11 +1,18 @@
 include <general.scad>
 include <rover5.scad>
-include <cover.scad>
+include <mount.scad>
+
+cover_float = 11;
+r5_back_mount_height = 30 + 11;
 
 // chassis
 rover5();
 
-// cover
-translate([-rover5_cover_width/2,-rover5_cover_length/2,rover5_body_height]) {
-  color("red") { rover5_cover(); }
+// mount = back plate + cover + battery
+translate([-r5_cover_width/2, -r5_cover_length/2, r5_body_height + 11]) {
+  color("red") { rover5_mount(); }
 }
+
+$vpr = [ 68.30, 0.00, 48.20 ];
+$vpd = 604.50;
+$vpt = [ 41.55, -43.69, 36.02 ];
