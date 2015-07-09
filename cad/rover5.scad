@@ -1,7 +1,7 @@
 // the Rover 5 Robot Platform
 
 r5_body_width  =  89;
-r5_body_length = 168;
+r5_body_length = 170.5;
 r5_body_height =  49;
 
 module rover5() {

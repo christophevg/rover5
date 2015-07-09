@@ -16,7 +16,9 @@ See [https://www.sparkfun.com/products/10336](https://www.sparkfun.com/products/
 
 ### General
 
-The [general](cad/general.scad) model contains variables and modules related to screws and nuts. These have to be tailored to the correct sizes of the used hardware to assemble the mount on the chassis.
+The [general](cad/general.scad) model contains variables and modules related to screws and nuts. These have to be tailored to the correct sizes of the used hardware to assemble the mount on the chassis:
+
+* nuts and bolts: `M3 x 16`
 
 ### Rover 5
 
@@ -24,16 +26,25 @@ The [rover5](cad/rover5.scad) model contains a basic model of the chassis. It st
 
 ![](images/rover5-render.png)
 
-### Mount
+### Mount (v2)
 
-The [cover](cad/cover.scad), [back](cad/back.scad) and [battery](cad/battery.scad) models provide three plates that can be combined into a mount that fits on top of the chassis. Use the [all](cad/all.scad) model to visualise it on top of the chassis:
+The [cover](cad/cover.scad), [back](cad/back.scad) and [battery](cad/battery.scad) models provide five plates that can be combined into a mount that fits on top of the chassis.
 
-![](images/rover5-mount-render.png)
+It features:
 
-Yeah, I know, it looks a bit like [Perry](https://en.wikipedia.org/wiki/Perry_the_Platypus) on wheels ;-)
+* holding space for a battery
+* additional support to ensure the nuts and bolts don't break the t-bolts
+* guides for keep wires clear towards the back
+* two additional holes for mounting retraction hooks (4mm)
+
+Use the [all](cad/all.scad) model to visualise it on top of the chassis:
+
+![](images/rover5-mount-v2-render.png)
 
 The [cut](cad/cut.scad) model makes a 2D projection of all plates, ready for laser cutting:
 
-![](images/rover5-mount-cut.png)
+![](images/rover5-mount-v2-cut.png)
+
+The cut here also includes an empty space, in this case for a servo that rises from the chassis.
 
 _More to come..._
