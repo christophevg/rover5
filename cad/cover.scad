@@ -23,7 +23,7 @@ module rover5_cover_back_wings() {
   translate([ r5_cover_width - r5_cover_mount_hole_dx, 0, 0 ]) { mount_wing(); }
 }
 
-module rover5_cover() {
+module rover5_cover(with_tbolts=true, with_back_holes=true) {
  
   module mount_hole()          { screw_hole(r5_cover_thickness);   }
   module mount_insert()        { screw_insert(r5_cover_thickness); }
@@ -38,19 +38,21 @@ module rover5_cover() {
     }
 
     // mount holes
-    // bottom-left
-    translate([ r5_cover_mount_hole_dx,
-                r5_cover_mount_hole_dy,
-                0 ])
-    {
-      mount_hole();
-    }
-    // bottom-right
-    translate([ r5_cover_width - r5_cover_mount_hole_dx,
-                r5_cover_mount_hole_dy,
-                0 ])
-    {
-      mount_hole();
+    if(with_back_holes) {
+        // bottom-left
+        translate([ r5_cover_mount_hole_dx,
+                    r5_cover_mount_hole_dy,
+                    0 ])
+        {
+          mount_hole();
+        }
+        // bottom-right
+        translate([ r5_cover_width - r5_cover_mount_hole_dx,
+                    r5_cover_mount_hole_dy,
+                    0 ])
+        {
+        mount_hole();
+        }
     }
     // top-left
     translate([ r5_cover_mount_hole_dx,
@@ -67,12 +69,14 @@ module rover5_cover() {
       mount_hole();
     }
     
-    // back inserts, centered across spce between wings
-    d1 = r5_cover_mount_hole_dx + r5_cover_wing_side / 2;    // right side wing
-    d2 = r5_cover_width / 2     - r5_cover_wing_center / 2;  // left center wing
-    d = d1 + (d2-d1)/2;                                      // center
-    translate([d, 0, 0])                { mount_insert(); }
-    translate([r5_cover_width-d, 0, 0]) { mount_insert(); }
+    if(with_tbolts) {
+        // back inserts, centered across spce between wings
+        d1 = r5_cover_mount_hole_dx + r5_cover_wing_side / 2;    // right side wing
+        d2 = r5_cover_width / 2     - r5_cover_wing_center / 2;  // left center wing
+        d = d1 + (d2-d1)/2;                                      // center
+        translate([d, 0, 0])                { mount_insert(); }
+        translate([r5_cover_width-d, 0, 0]) { mount_insert(); }
+    }
   }
 }
 
