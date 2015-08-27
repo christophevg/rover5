@@ -8,11 +8,11 @@ r5_back_mount_height = 30 + 11;     // position on back where cover is mounted
 projection(cut = true) {
   translate([0, 3, 0]) {
     difference() {
-      rover5_cover();
+      rover5_cover(false, false);
       // custom servo hole
       servo_width      =  44;
       servo_length     = 110;
-      servo_from_front =  15.5;
+      servo_from_front =  12.5;
       translate([(r5_cover_width-servo_width)/2,
                   r5_cover_length - servo_length - servo_from_front,
                   0])
@@ -21,9 +21,9 @@ projection(cut = true) {
       }
     }
   }
-  translate([r5_body_width +10, 120, 0]) { rover5_back(); }
-  translate([r5_body_width +10, 110, 0]) { mirror([0,1,0]) { rover5_battery(); }}
-  translate([r5_body_width +10,  40, 0]) { mirror([0,1,0]) { rover5_battery_border();}}
+  translate([r5_body_width +10, 150, 0]) { rover5_back(); }
+  translate([r5_body_width +10, 144, 0]) { mirror([0,1,0]) { rover5_battery(); }}
+  translate([r5_body_width +10,  62, 0]) { mirror([0,1,0]) { rover5_battery_border();}}
 
   translate([r5_cover_width/2+5,r5_cover_length/2-5,0]) {
     rotate([0, 0, 90]) {
