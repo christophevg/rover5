@@ -3,7 +3,7 @@ include <rover5.scad>
 include <cover.scad>
 
 r5_back_width                = r5_body_width;
-r5_back_height               = 120 - 63;    // max - top rover (TODO: extract)
+r5_back_height               = 120 - 63 + 15;    // max - top rover (TODO: extract)
 r5_back_thickness            = r5_cover_thickness;
 r5_back_mount_height         = 30 + 11;
 r5_back_battery_height       = 25;

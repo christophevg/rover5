@@ -3,7 +3,7 @@ include <rover5.scad>
 include <back.scad>
 
 r5_battery_width     = r5_body_width;
-r5_battery_length    = 56 + 5;
+r5_battery_length    = 56 + 5 + 15;
 r5_battery_thickness = 3;
 
 r5_battery_mount_hole_dx = 11;
@@ -75,17 +75,19 @@ module rover5_battery_t_bolt_holes() {
   translate([r5_battery_width-d, 0, 0]) { mount_hole(); }
 }
 
+r5_battery_border_height = r5_back_height - r5_back_battery_height + 15;
+
 module rover5_battery_border() {
   difference() {
     union() {
       // plate
-      cube([r5_battery_width, r5_back_battery_height + 15, r5_battery_thickness]);
+      cube([r5_battery_width, r5_battery_border_height, r5_battery_thickness]);
       rover5_battery_back_wings();
     }
     // t-bolt inserts
     rover5_battery_t_bolt_inserts();
     // cable guide
-    translate([r5_battery_width/2 + 8, r5_back_battery_height, 0]) {
+    translate([r5_battery_width/2 + 8, r5_battery_border_height - 15, 0]) {
       minkowski() {
         union() {
           rotate([0,0,0]) cube([5,15,r5_battery_thickness]);
