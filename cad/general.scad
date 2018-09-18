@@ -1,5 +1,7 @@
 // general
-$fn=25;
+$fn = 25;
+
+print_extra = 0.20;
 
 // additional shapes
 
@@ -21,25 +23,35 @@ nut_diameter   = 6.4;
 nut_radius     = nut_diameter / 2;
 nut_height     = 3; 
 
-module screw_hole(depth) {
-  cylinder(h=depth, r=screw_radius);
+module screw_hole(depth=3, print=false) {
+  cylinder(h=depth, r=screw_radius+print_extra);
 }
 
 // screw_hole();
 
-module screw_insert(depth=3,nut_offset=0) {
-  translate([0, screw_length/2, depth/2]) { 
-    cube([screw_diameter, screw_length, depth], true);
-    translate([0, screw_length/2 - screw_length/3 - nut_offset, 0]) {
-      cube([  nut_diameter,   nut_height, depth], true);
+module tbolt(depth=3,nut_offset=0,print=false) {
+	more = print ? 2*print_extra : 0;
+	sl = screw_length + more;
+	sd = screw_diameter + more;
+	nd = nut_diameter + more;
+	nh = nut_height + more;
+  translate([0, sl/2-0.01, depth/2]) { 
+    cube([sd, sl, depth], true);
+    translate([0, sl/2 - sl/3 - nut_offset, 0]) {
+      cube([nd, nh, depth], true);
     }
   }
 }
 
-// screw_insert();
+// tbolt();
 
-module wing(length=10, depth=3)  {
-  translate([-length/2, -depth, 0]) { cube([length, depth, depth]); }
+module wing(length=10, depth=3, print=false)  {
+	more = print ? 2*print_extra : 0;
+	d = depth + more;
+	l = length + more;
+  translate([-l/2, -d/2, 0]) {
+		cube([l, d, depth]);
+	}
 }
 
 // wing();

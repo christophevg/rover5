@@ -14,7 +14,7 @@ r5_battery_wing_depth    = r5_battery_thickness; // same thickness for back-plat
 
 module mount_hole()          { screw_hole(r5_battery_thickness);   }
 module mount_insert(nut_offset=0) {
-  screw_insert(r5_battery_thickness, nut_offset=nut_offset);
+  tbolt(r5_battery_thickness, nut_offset=nut_offset);
 }
 module mount_wing(length=10) { wing(length=length, depth=r5_battery_wing_depth); }
 

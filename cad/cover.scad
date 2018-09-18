@@ -26,7 +26,7 @@ module rover5_cover_back_wings() {
 module rover5_cover(with_tbolts=true, with_back_holes=true) {
  
   module mount_hole()          { screw_hole(r5_cover_thickness);   }
-  module mount_insert()        { screw_insert(r5_cover_thickness); }
+  module mount_insert()        { tbolt(r5_cover_thickness); }
 
   difference() {
     // main cover
