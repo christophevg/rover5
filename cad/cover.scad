@@ -11,9 +11,9 @@ r5_cover_wing_side     = 10;
 r5_cover_wing_center   = 20;
 r5_cover_wing_depth    = r5_cover_thickness; // same thickness for back-plate
 
-module rover5_cover_back_wings() {
+module rover5_cover_back_wings(print=false, tolerance=default_tolerance) {
 
-  module mount_wing(length=10) { wing(length=length, depth=r5_cover_wing_depth); }
+  module mount_wing(length=10) { wing(length=length, depth=r5_cover_wing_depth, print=print, tolerance=tolerance); }
 
   // side
   translate([ r5_cover_mount_hole_dx, 0, 0 ])                  { mount_wing(); }
@@ -23,10 +23,10 @@ module rover5_cover_back_wings() {
   translate([ r5_cover_width - r5_cover_mount_hole_dx, 0, 0 ]) { mount_wing(); }
 }
 
-module rover5_cover(with_tbolts=true, with_back_holes=true) {
+module rover5_cover(with_tbolts=true, with_back_holes=true, print=false, tolerance=default_tolerance) {
  
-  module mount_hole()          { screw_hole(r5_cover_thickness);   }
-  module mount_insert()        { tbolt(r5_cover_thickness); }
+  module mount_hole()          { screw_hole(r5_cover_thickness, print=print, tolerance=tolerance);   }
+  module mount_insert()        { tbolt(r5_cover_thickness, print=print, tolerance=tolerance); }
 
   difference() {
     // main cover
@@ -34,7 +34,7 @@ module rover5_cover(with_tbolts=true, with_back_holes=true) {
       // plate
       cube([r5_cover_width, r5_cover_length, r5_cover_thickness]);
 
-      rover5_cover_back_wings();
+      translate([0, -r5_cover_wing_depth/2, 0]) { rover5_cover_back_wings(); }
     }
 
     // mount holes

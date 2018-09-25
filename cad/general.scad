@@ -1,7 +1,11 @@
 // general
-$fn = 25;
+$fn = 250;
 
-print_extra = 0.20;
+default_tolerance = 0.30;
+
+thickness = 3;
+
+function more(print=false, tolerance=default_tolerance) = print ? 2*tolerance : 0;
 
 // additional shapes
 
@@ -16,21 +20,22 @@ module prism(w, l, h) {
 // screw size
 screw_diameter = 3.1;
 screw_radius   = screw_diameter / 2;
-screw_length   = 16 - 3;
+screw_length   = 16 - 2;
 
 // nut size
 nut_diameter   = 6.4;
 nut_radius     = nut_diameter / 2;
 nut_height     = 3; 
 
-module screw_hole(depth=3, print=false) {
-  cylinder(h=depth, r=screw_radius+print_extra);
+module screw_hole(depth=thickness, print=false, tolerance=default_tolerance) {
+	more = more(print, tolerance/2);
+  cylinder(h=depth, r=screw_radius+more);
 }
 
 // screw_hole();
 
-module tbolt(depth=3,nut_offset=0,print=false) {
-	more = print ? 2*print_extra : 0;
+module tbolt(depth=thickness,nut_offset=0,print=false, tolerance=default_tolerance) {
+	more = more(print, tolerance);
 	sl = screw_length + more;
 	sd = screw_diameter + more;
 	nd = nut_diameter + more;
@@ -45,8 +50,8 @@ module tbolt(depth=3,nut_offset=0,print=false) {
 
 // tbolt();
 
-module wing(length=10, depth=3, print=false)  {
-	more = print ? 2*print_extra : 0;
+module wing(length=10, depth=thickness, print=false, tolerance=default_tolerance)  {
+	more = more(print, tolerance);
 	d = depth + more;
 	l = length + more;
   translate([-l/2, -d/2, 0]) {

@@ -5,14 +5,14 @@ include <cover.scad>
 r5_back_width                = r5_body_width;
 r5_back_height               = 120 - 63 + 15;    // max - top rover (TODO: extract)
 r5_back_thickness            = r5_cover_thickness;
-r5_back_mount_height         = 30 + 11;
+r5_back_mount_height         = 30 + 11 + 1.5;
 r5_back_battery_height       = 25;
 r5_back_battery_mount_height = r5_back_mount_height - r5_back_battery_height;
 
-module rover5_back() {
+module rover5_back(print=false, tolerance=default_tolerance) {
+	more = more(print, tolerance);
  
-  module mount_hole()          { screw_hole(r5_cover_thickness);   }
-  module mount_wing(length=10) { wing(length=length, depth=r5_back_thickness); }
+  module mount_hole() { screw_hole(depth=r5_cover_thickness, print=print, tolerance=tolerance);   }
 
   module holes_and_wings() {
     // back inserts, centered across space between wings
@@ -21,15 +21,19 @@ module rover5_back() {
     d = d1 + (d2-d1)/2;                                      // center
 
     // mount holes for screw insets
-    translate([0, screw_radius, 0]) {       // screws aligned at bottom
-      translate([d, 0, 0])                  { mount_hole(); }
-      translate([r5_cover_width - d, 0, 0]) { mount_hole(); }
-    }
+    translate([d, 0, 0])                  { mount_hole(); }
+    translate([r5_cover_width - d, 0, 0]) { mount_hole(); }
+
     // wing insets
-    translate([0, r5_cover_wing_depth,0]) {
-      rover5_cover_back_wings();
-    }
+    rover5_cover_back_wings(print=print, tolerance=tolerance);
   }
+
+	module hook_hole() {
+		more = more(print, tolerance/2);
+    cylinder(h=r5_cover_thickness, r=(4.1/2)+more);
+	}
+
+	more = more(print, tolerance);
 
   difference() {
     cube([r5_back_width, r5_back_height + 15, r5_back_thickness]);
@@ -51,20 +55,20 @@ module rover5_back() {
     
     // holes for withdrawl hooks (4mm)
     translate([r5_back_width / 4, r5_back_battery_mount_height / 2, 0]) {
-      cylinder(h=r5_cover_thickness, r=4.1/2);;
+			hook_hole();
     }
     translate([r5_back_width / 4 * 3, r5_back_battery_mount_height / 2, 0]) {
-      cylinder(h=r5_cover_thickness, r=4.1/2);;
+			hook_hole();
     }
 
     // cable guide
     translate([r5_back_width/2 + 8, r5_back_height + 15 - 15, 0]) {
       minkowski() {
         union() {
-          rotate([0,0,0]) cube([5,15,r5_back_thickness]);
-          rotate([0,0,90]) cube([5,20,r5_back_thickness]);
+          rotate([0, 0,  0]) cube([5+more, 15+more, r5_back_thickness]);
+          rotate([0, 0, 90]) cube([5+more, 20+more, r5_back_thickness]);
         }
-        cylinder(r=1,h=r5_back_thickness);
+        cylinder(r=1, h=r5_back_thickness);
       }
     }
 
