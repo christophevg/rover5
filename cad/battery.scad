@@ -42,17 +42,18 @@ module rover5_battery_support_wings(print=false, tolerance=default_tolerance) {
 r5_battery_support_length = r5_battery_length - 10;
 
 module rover5_battery_support(print=false, tolerance=default_tolerance) {
+  more = more(print, tolerance) * 2;
   difference() {
     union() {
       cube([r5_battery_support_length, 5, r5_battery_thickness]);
-      cube([20, r5_back_battery_mount_height, r5_battery_thickness]);
+      cube([20, r5_back_battery_mount_height-more, r5_battery_thickness]);
       translate([20,5,0]) {
         prism(r5_battery_support_length - 20,
-              r5_back_battery_mount_height - 5,
+              r5_back_battery_mount_height - 5 - more,
               r5_battery_thickness);
       }
     }
-    translate([0, r5_back_battery_mount_height/2, 0]) {
+    translate([0, r5_back_battery_mount_height/2-more, 0]) {
       rotate([0, 0, -90]) {
         mount_insert(print=print, tolerance=tolerance);
       }
