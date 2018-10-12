@@ -65,6 +65,16 @@ module cover() {
       translate([0, -40, 0]) { servo_mount_hole(); }
       translate([0, -80, 0]) { servo_mount_hole(); }
     }
+    // hole for tumble switch
+    switch_radius = 6.5/2;
+    switch_lock_radius = 2.5/2;
+    switch_from_side = (r5_cover_width - servo_width)/4;
+    translate([switch_from_side, servo_length/2-servo_from_front, 0]) { 
+      cylinder(h=thickness, r=switch_radius);
+    }
+    translate([switch_from_side, servo_length/2-servo_from_front+6, thickness/2]) { 
+      cylinder(h=thickness/2, r=switch_lock_radius);
+    }
 	}
 }
 
