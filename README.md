@@ -47,4 +47,16 @@ The [cut](cad/cut.scad) model makes a 2D projection of all plates, ready for las
 
 The cut here also includes an empty space, in this case for a servo that rises from the chassis.
 
+### Print version
+
+The plexi laser cut parts proved to be a bit brittle, so for a next version, I decided to give 3D printed parts a go. Since 3D printed parts tend not to snap-fit nicely together, I had to introduce some margins.
+
+The [print](cad/print.scad) model serves as the top-level entry point for generating 3D printable STLs. The cover was also extended with mounting holes for the servo wich and a tumble switch.
+
+![](images/print-cover.png)
+
+Printing the parts on my Zortrax M200 resulted in the first partly failed prints due to warping when printing the large flat cover. I managed to print the cover reasonably adding two small clamps when warping appeared. I never found a use for those clamps before; now I know why I kept them around ;-)
+
+![](images/no-warping.jpg)
+
 _More to come..._
