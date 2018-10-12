@@ -34,6 +34,13 @@ module test() {
 // test();
 
 module cover() {
+  module servo_mount_hole() {
+    w = 4.5;
+    l = w;
+    translate([0, l/2, 0])     { cylinder(h=thickness, r=w/2); }
+    translate([-w/2, -l/2, 0]) { cube([w, l, thickness]); }
+    translate([0, -l/2, 0])    { cylinder(h=thickness, r=w/2); }
+  }
 	difference() {
 	  rover5_cover(false, false, print=printing);
 	  // custom servo hole
@@ -46,6 +53,18 @@ module cover() {
 	  {
 	    cube([servo_width, servo_length, r5_cover_thickness]);
 	  }
+    // holes for mounting servo
+    servo_mount_from_center = (r5_cover_width - servo_width)/2 + 7;
+    translate([r5_cover_width/2-servo_mount_from_center, r5_cover_length-23, 0]) {
+      servo_mount_hole();
+      translate([0, -40, 0]) { servo_mount_hole(); }
+      translate([0, -80, 0]) { servo_mount_hole(); }
+    }
+    translate([r5_cover_width/2+servo_mount_from_center, r5_cover_length-23, 0]) {
+      servo_mount_hole();
+      translate([0, -40, 0]) { servo_mount_hole(); }
+      translate([0, -80, 0]) { servo_mount_hole(); }
+    }
 	}
 }
 
